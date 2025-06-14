@@ -2,8 +2,11 @@ import { FC } from "react";
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
-import { Bounded } from "@/components/Bounded";
 import clsx from "clsx";
+
+// Components
+import { Bounded } from "@/components/Bounded";
+import { FadeIn } from "@/components/FadeIn";
 
 /**
  * Props for `Hero`.
@@ -14,15 +17,16 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
  * Component for "Hero" Slices.
  */
 const Hero: FC<HeroProps> = ({ slice }) => {
-  // console.log("slice.primary.button:", slice.primary.button);
-
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="relative min-h-screen overflow-hidden bg-neutral-950"
     >
-      <div className="absolute inset-0 scale-125">
+      <FadeIn
+        vars={{ scale: 1, opacity: 0.5 }}
+        className="absolute inset-0 scale-125 opacity-0"
+      >
         <PrismicNextImage
           field={slice.primary.image}
           alt=""
@@ -30,16 +34,22 @@ const Hero: FC<HeroProps> = ({ slice }) => {
           fill
           className="object-cover opacity-50"
         />
-      </div>
+      </FadeIn>
       <div className="relative flex h-screen flex-col justify-center">
-        <div className="font-display max-w-xl text-6xl leading-tight text-neutral-50 md:text-7xl lg:text-8xl">
+        <FadeIn className="font-display max-w-xl text-6xl leading-tight text-neutral-50 md:text-7xl lg:text-8xl">
           <PrismicRichText field={slice.primary.heading} />
-        </div>
+        </FadeIn>
 
-        <div className="mt-6 max-w-md text-lg text-neutral-100">
+        <FadeIn
+          className="mt-6 max-w-md translate-y-8 text-lg text-neutral-100"
+          vars={{ delay: 1, duration: 1.3 }}
+        >
           <PrismicRichText field={slice.primary.body} />
-        </div>
-        <div className="mt-8">
+        </FadeIn>
+        <FadeIn
+          className="mt-8 translate-y-5"
+          vars={{ delay: 1.7, duration: 1.1 }}
+        >
           {slice.primary.button.map((link) => (
             <PrismicNextLink
               key={link.key}
@@ -52,7 +62,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
               )}
             />
           ))}
-        </div>
+        </FadeIn>
       </div>
     </Bounded>
   );
