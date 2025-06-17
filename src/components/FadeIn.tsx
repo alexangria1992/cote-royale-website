@@ -16,6 +16,8 @@ export const FadeIn = ({ children, vars = {}, className }: FadeInProps) => {
   // console.log("slice.primary.button:", slice.primary.button);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const mm = gsap.matchMedia();
+
   useGSAP(
     () => {
       gsap.to(containerRef.current, {

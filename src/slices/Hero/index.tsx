@@ -7,6 +7,7 @@ import clsx from "clsx";
 // Components
 import { Bounded } from "@/components/Bounded";
 import { FadeIn } from "@/components/FadeIn";
+import { RevealText } from "@/components/RevealText";
 
 /**
  * Props for `Hero`.
@@ -36,9 +37,15 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         />
       </FadeIn>
       <div className="relative flex h-screen flex-col justify-center">
-        <FadeIn className="font-display max-w-xl text-6xl leading-tight text-neutral-50 md:text-7xl lg:text-8xl">
-          <PrismicRichText field={slice.primary.heading} />
-        </FadeIn>
+        <RevealText
+          field={slice.primary.heading}
+          id="hero-heading"
+          className="font-display max-w-xl text-6xl leading-none text-neutral-50 md:text-7xl lg:text-8xl"
+          staggerAmount={0.2}
+          duration={1.7}
+          as="h1"
+        />
+        {/* <PrismicRichText field={slice.primary.heading} /> */}
 
         <FadeIn
           className="mt-6 max-w-md translate-y-8 text-lg text-neutral-100"
